@@ -1,8 +1,20 @@
 export interface CreatePost
 {
-  "title" : string,
-  "description" : string,
-  "categoryId" : number,
-  "createdBy": string,
-  "createDate": string,
+
+    "id": number,
+    "title":string,
+    "description": string,
+    "image": string,
+    "comments":  {
+      "id": number,
+      "name": string,
+      "email": string,
+      "body":string
+  },
+    "categoryId": number,
+    "createdBy": string,
+    "createDate": string,
+    "lastModifiedBy":string,
+    "lastModifiedDate": string
+
   }

@@ -2,6 +2,7 @@ import { Component, Input , OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../services/home.service';
+import { CreateComment } from '../interfaces/CreateComment';
 
 @Component({
   selector: 'app-comments',
@@ -22,27 +23,22 @@ export class CommentsComponent  implements OnInit{
     });
   }
 
-  submit = false
   commentForm !: FormGroup;
   @Input() postId !: number
   @Input() data !: [
-    {
-      "id": number,
-      "name": string,
-      "email": string,
-      "body": string
-    }
+   CreateComment
   ];
 
 
   onSubmit() {
-    this.submit = true
+    console.log("testing");
+
     console.log(this.commentForm.value)
     localStorage.clear()
-    this.homeService.createComment(this.postId,this.commentForm.value).subscribe({
-      next: (res: string) => {
+    this.homeService.createComment(this.postId,{ body : this.commentForm.value.msg}).subscribe({
+      next: (res: CreateComment) => {
         console.log(res)
-
+        this.data.push(res)
         // this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
       },
       error: (err) => {

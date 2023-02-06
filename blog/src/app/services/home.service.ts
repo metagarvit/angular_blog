@@ -25,13 +25,13 @@ export class HomeService {
   }
 
   //create blog post
-  createPost(   post: CreatePost): Observable<string> {
-    return this.http.post(`${this.url}/posts` , post , {responseType: 'text'} )
+  createPost(   post: CreatePost): Observable<CreatePost> {
+    return this.http.post<CreatePost>(`${this.url}/posts` , post)
   }
 
   //update blog post
-  updatePost(   id :  number ,  post: CreatePost): Observable<string> {
-    return this.http.put(`${this.url}/posts/${id}` , post , {responseType: 'text'} )
+  updatePost(   id :  number ,  post: CreatePost): Observable<CreatePost> {
+    return this.http.put<CreatePost>(`${this.url}/posts/${id}` , post  )
   }
 
   //delete blog post
@@ -41,8 +41,17 @@ export class HomeService {
 
 
   //create comment
-  createComment(  id :  number , commment: CreateComment): Observable<string> {
-    return this.http.post(`${this.url}/posts/${id}` , commment , {responseType: 'text'} )
+  createComment(  id :  number , commment: {
+    "body" : string
+    }): Observable<CreateComment> {
+    return this.http.post<CreateComment>(`${this.url}/posts/${id}/comments` , commment  )
   }
+
+  //delete comment
+  deleteComment(  id :  number , commentId : number ,  commment: CreateComment): Observable<string> {
+    return this.http.post(`${this.url}/posts/${id}/comments/${commentId}` , commment ,{responseType: 'text'}  )
+  }
+
+
 
 }

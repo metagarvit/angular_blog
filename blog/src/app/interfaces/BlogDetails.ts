@@ -1,3 +1,4 @@
+import { CreateComment } from "./CreateComment"
 
 export interface BlogDetails {
   id: number,
@@ -5,11 +6,6 @@ export interface BlogDetails {
   description: string,
   categoryId: string
   comments: [
-    {
-      "id": number,
-      "name": string,
-      "email": string,
-      "body": string
-    }
+    CreateComment
   ]
 }

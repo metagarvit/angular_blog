@@ -1,7 +1,9 @@
 export  interface CreateComment{
-  "name" :string,
-  "email" :string,
-  "body" : string,
+
+  "id": number,
+  "body": string,
   "createdBy": string,
   "createDate": string,
+  "lastModifiedBy":string,
+  "lastModifiedDate":string
   }
