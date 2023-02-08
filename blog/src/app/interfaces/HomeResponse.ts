@@ -4,6 +4,6 @@ export interface HomeResponse{
   totalElements : number
   totalPages : number
   last : boolean
-  content : [ {id : number , title : string , description : string ,  categoryId : string   }]
+  content : [ {id : number , title : string , description : string ,  categoryId : string  , image : string  }]
 
 }

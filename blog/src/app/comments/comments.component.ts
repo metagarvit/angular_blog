@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../services/home.service';
 import { CreateComment } from '../interfaces/CreateComment';
+import { MessageService } from 'primeng-lts/api';
+// import {MessageService} from 'primeng-lts/api';
 
 @Component({
   selector: 'app-comments',
@@ -12,7 +14,9 @@ import { CreateComment } from '../interfaces/CreateComment';
 export class CommentsComponent  implements OnInit{
 
 
-  constructor(private homeService: HomeService,public  route: ActivatedRoute) { }
+  constructor(private homeService: HomeService,public  route: ActivatedRoute
+    ,private messageService: MessageService
+    ) { }
 
 
   ngOnInit() {
@@ -33,13 +37,13 @@ export class CommentsComponent  implements OnInit{
   onSubmit() {
     console.log("testing");
 
+
     console.log(this.commentForm.value)
-    localStorage.clear()
     this.homeService.createComment(this.postId,{ body : this.commentForm.value.msg}).subscribe({
       next: (res: CreateComment) => {
         console.log(res)
         this.data.push(res)
-        // this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+        this.messageService.add({severity:'success', summary:'Success', detail:'Comment send successfull'});
       },
       error: (err) => {
         console.log(err)

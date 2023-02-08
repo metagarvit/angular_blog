@@ -12,6 +12,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {ToastModule} from 'primeng-lts/toast';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -32,10 +33,13 @@ import { IntercepterService } from './loader/intercepter.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CreatepostComponent } from './createpost/createpost.component';
 import { LoaderComponent } from './loader/loader.component';
+import { MessageService } from 'primeng-lts/api';
+import {DropdownModule} from 'primeng-lts/dropdown';
 
 //Routing
 const appRoutes : Routes = [
   {path : 'login', component : LoginComponent},
+  {path : 'createpost', component : CreatepostComponent},
   {path : 'userdetails', component : UserDetailsComponent},
   {path : 'blog/:id', component : BlogDetailsComponent},
   {path : 'bloglist', component : BlogListComponent},
@@ -79,9 +83,11 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    ToastModule,
+    DropdownModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true }, ],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true }, MessageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

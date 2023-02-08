@@ -6,6 +6,9 @@ import { UserResponse } from '../interfaces/UserReponse';
 @Injectable({
   providedIn: 'root'
 })
+/**
+Contains all authentication related api
+ */
 export class AuthService {
 
   constructor(private http: HttpClient) { }
@@ -27,6 +30,11 @@ export class AuthService {
     return true;
   }
 
+  saveRole(role: string) {
+    localStorage.setItem("admin", role);
+    return true;
+  }
+
   isLoggedIn() : boolean {
     let token = localStorage.getItem("token");
     if (token == undefined || token == '' || token == null) {
@@ -35,6 +43,21 @@ export class AuthService {
     }
     else {
       return true;
+    }
+  }
+
+  isAdmin() : boolean {
+    let token = localStorage.getItem("admin");
+    if (token == undefined || token == '' || token == null) {
+      return false;
+    }
+    else {
+     if(token == 'true'){
+      return true;
+     }
+     else{
+      return false;
+     }
     }
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoaderService } from './loader/loader.service';
 import { Subject } from 'rxjs';
+import { MessageService } from 'primeng-lts/api';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { Subject } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor( private messageService: MessageService){
+
+  }
 
   
 

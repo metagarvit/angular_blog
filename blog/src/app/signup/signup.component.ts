@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ToastTrigerService } from '../services/toast-triger.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class SignupComponent implements OnInit {
   errorMessage = ""
 
-  constructor(private authService: AuthService, private router: Router)
+  constructor(private authService: AuthService, private router: Router , private  toastTriggerService: ToastTrigerService)
   {
 
   }
@@ -20,7 +21,7 @@ export class SignupComponent implements OnInit {
   signupForm !: FormGroup;
 
   ngOnInit() {
-
+    localStorage.clear()
     this.signupForm = new FormGroup({
       'name': new FormControl(null , Validators.required),
       'username': new FormControl(null , Validators.required),
@@ -56,6 +57,7 @@ export class SignupComponent implements OnInit {
         console.log("type of ->>"+ typeof(res))
         console.log("type of ->>"+ res)
 
+        this.toastTriggerService.triggerToast('success', 'Success',res)
         this.router.navigate(['/login'])
         // window.location.href = "/login"
 
