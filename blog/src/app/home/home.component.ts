@@ -1,7 +1,7 @@
 import { Component  , OnInit} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HomeService } from '../services/home.service';
-import { HomeResponse } from '../interfaces/HomeResponse';
+import { Content, HomeResponse } from '../interfaces/HomeResponse';
 
 @Component({
   selector: 'app-home',
@@ -9,18 +9,31 @@ import { HomeResponse } from '../interfaces/HomeResponse';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  response : HomeResponse = {} as HomeResponse
 
+page = 0
   constructor(private homeService: HomeService){
 
   }
-
+responseData : Content[] = []
   ngOnInit(): void {
 
-    this.homeService.homeResponse().subscribe({
+    this.homeService.homeResponseByPagination(this.page).subscribe({
       next: (res: HomeResponse) => {
         console.log(res)
-      this.response = res
+      this.responseData.push(... res.content)
+      },
+      error: (err) => {
+        console.log("Error ->>>" + err)
+          console.log("Inside Error");
+      }
+    })
+  }
+
+  onScroll(): void {
+    this.homeService.homeResponseByPagination(++this.page).subscribe({
+      next: (res: HomeResponse) => {
+        console.log(res)
+      this.responseData.push(... res.content)
       },
       error: (err) => {
         console.log("Error ->>>" + err)

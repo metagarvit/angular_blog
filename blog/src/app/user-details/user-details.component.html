@@ -3,36 +3,42 @@
 style="background-color: #19aa8d;"
 > -->
 
-  <div class="signup-form">
-    <form   [formGroup]="udpateDetails" (ngSubmit)="onSubmit()">
-      <h2>Profile</h2>
-      <p></p>
-      <hr />
-      <div class="form-group">
-        <div class="input-group d-flex align-items-center">
-          <span class="input-group-addon"><i class="fa fa-user mx-1"></i></span>
-          <input type="text" class="form-control" formControlName="username" placeholder="Username" required="required" />
-        </div>
-        <div *ngIf="!udpateDetails.get('username')?.valid  && udpateDetails.get('username')?.touched" class="d-flex text-danger justify-content-end">
-          Please enter username!!
-        </div>
+<div class="">
+  <div class="card-body">
+    <div class="d-flex flex-column align-items-center text-center">
+      <img [src]="response.profileImage" alt="Admin" class="rounded-circle img-fluid " width="150">
+      <div class="mt-3">
+        <h4>{{response.username}}</h4>
+        <p class="text-secondary mb-1">Name : {{response.name}}</p>
+        <p class="text-muted font-size-sm">Email : {{response.email}}</p>
+        <button class="btn btn-primary mx-2" (click) ="changePassword()">Change Password</button>
 
       </div>
+    </div>
+  </div>
+</div>
+
+  <div class="signup-form" *ngIf="flagPassword">
+    <form   [formGroup]="udpateDetails" (ngSubmit)="onSubmit()">
+      <h2>Change Password</h2>
+      <p></p>
+      <hr />
+
       <div class="form-group">
         <div class="input-group d-flex align-items-center">
-          <span class="input-group-addon"><i class="fa fa-paper-plane mx-1"></i></span>
-          <input type="email" class="form-control" formControlName="email" placeholder="Email Address" required="required" />
+          <span class="input-group-addon"><i class="fa fa-lock mx-1"></i></span>
+          <input type="password" class="form-control" formControlName="oldPassword" placeholder="Password" required="required" />
         </div>
-        <div *ngIf="!udpateDetails.get('email')?.valid  && udpateDetails.get('email')?.touched" class="d-flex text-danger justify-content-end">
+        <div *ngIf="!udpateDetails.get('oldPassword')?.valid  && udpateDetails.get('oldPassword')?.touched" class="d-flex text-danger justify-content-end">
           Please enter valid email!!
         </div>
       </div>
       <div class="form-group">
         <div class="input-group d-flex align-items-center">
           <span class="input-group-addon"><i class="fa fa-lock mx-1"></i></span>
-          <input type="text" class="form-control" formControlName="password" placeholder="Password" required="required" />
+          <input type="password" class="form-control" formControlName="newPassword" placeholder="New Password" required="required" />
         </div>
-        <div *ngIf="!udpateDetails.get('password')?.valid  && udpateDetails.get('password')?.touched" class="d-flex text-danger justify-content-end">
+        <div *ngIf="!udpateDetails.get('newPassword')?.valid  && udpateDetails.get('newPassword')?.touched" class="d-flex text-danger justify-content-end">
           Password must contain at least one number, one uppercase and a
           lowercase letter and at least 8 characters.
         </div>
@@ -42,7 +48,7 @@ style="background-color: #19aa8d;"
           <span class="input-group-addon">
             <i class="fa fa-lock mx-1"></i>
           </span>
-          <input type="text" class="form-control" formControlName="confirm_password" placeholder="Confirm Password"
+          <input type="password" class="form-control" formControlName="confirm_password" placeholder="Confirm Password"
             required="required" />
         </div>
         <div *ngIf="!udpateDetails.get('confirm_password')?.valid  && udpateDetails.get('confirm_password')?.touched" class="d-flex text-danger justify-content-end">
@@ -53,7 +59,7 @@ style="background-color: #19aa8d;"
         <!-- <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
       </div>
       <div class="form-group d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary btn-lg">Update Details</button>
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!udpateDetails.valid">Update Password</button>
       </div>
     </form>
 

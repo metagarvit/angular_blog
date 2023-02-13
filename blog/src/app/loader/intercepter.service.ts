@@ -11,19 +11,19 @@ import { Router } from '@angular/router'
 })
 export class IntercepterService implements HttpInterceptor {
 
-  token = localStorage.getItem("token");
+
   constructor(private router: Router, public loadingService: LoaderService) { }
 
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    var headers_object = new HttpHeaders().set("Authorization", "Bearer " +this.token || "");
+   let  token = localStorage.getItem("token");
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " +token || "");
     const authReq = req.clone({ headers: headers_object });
 
     this.loadingService.show();
     let isLogin = false
-    if (this.token == undefined || this.token == '' || this.token == null) {
+    if (token == undefined || token == '' || token == null) {
     console.log("false");
 
       isLogin = false;
@@ -44,7 +44,7 @@ export class IntercepterService implements HttpInterceptor {
             console.log(error.status);
             console.log(error.statusText);
             if (error.status === 401) {
-              window.location.href = "/login";
+              // window.location.href = "/login";
             }
           }
           return throwError(() => error);

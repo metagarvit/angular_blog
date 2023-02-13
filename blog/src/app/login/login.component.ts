@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
         console.log("Inside Error");
         console.log(err.error.message);
         this.errorMessage = err.error.message
+        this.toastTriggerService.triggerToast('error', 'Failure', err.message)
       }
     })
 

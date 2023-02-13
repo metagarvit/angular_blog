@@ -35,6 +35,8 @@ import { CreatepostComponent } from './createpost/createpost.component';
 import { LoaderComponent } from './loader/loader.component';
 import { MessageService } from 'primeng-lts/api';
 import {DropdownModule} from 'primeng-lts/dropdown';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 //Routing
 const appRoutes : Routes = [
@@ -85,6 +87,7 @@ const appRoutes : Routes = [
     MatProgressSpinnerModule,
     ToastModule,
     DropdownModule,
+    InfiniteScrollModule ,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true }, MessageService ],

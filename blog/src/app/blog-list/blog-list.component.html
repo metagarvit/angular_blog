@@ -17,7 +17,7 @@
         </td>
         <td>{{item.lastModifiedDate}}</td>
         <td>
-          <button class="btn btn-primary">Update</button>
+          <button class="btn btn-primary" *ngIf="false">Update</button>
           <button class="btn btn-danger mx-2" (click)="deletePost( item.id, idx )">Delete</button>
           <button class="btn btn-success" [routerLink]="['/blog/' ,item.id ]">View</button>
         </td>

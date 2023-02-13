@@ -1,6 +1,11 @@
-
 <div
-*ngFor="let item of response.content">
+  infinite-scroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()"
+>
+<div
+*ngFor="let item of  responseData">
 
 <div class="d-flex justify-content-center mt-3">
   <div class="card" style="width: 50%">
@@ -12,7 +17,7 @@
       />
       <div class="bottom-left">
         <img
-          src="/assets/images1.png"
+        [src]='item.userProfile'
           class="mx-3 card-img-top img-fluid rounded-circle"
           alt="..."
           style="width: 40px; height: 40px"
@@ -23,7 +28,7 @@
       <div>
         <span class="card-title h5"> {{item.title}} </span>
         <span class="mx-2 fw-light fst-italic" style="font-size: small"
-          >By garvit
+          >By {{item.lastModifiedBy}}
         </span>
       </div>
       <p class="card-text d-inline-block col-10 text-truncate">
@@ -35,3 +40,4 @@
 </div>
 </div>
 
+</div>

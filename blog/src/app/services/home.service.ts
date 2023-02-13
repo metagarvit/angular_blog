@@ -21,6 +21,11 @@ export class HomeService {
     return this.http.get<HomeResponse>(`${this.url}/posts`)
   }
 
+  // get all blog post
+  homeResponseByPagination(pageNo : number): Observable<HomeResponse> {
+    return this.http.get<HomeResponse>(`${this.url}/posts?pageNo=${pageNo}`)
+  }
+
   //blog details
   blogDetails(id: number): Observable<BlogDetails> {
     return this.http.get<BlogDetails>(`${this.url}/posts/${id}`)
@@ -57,6 +62,11 @@ export class HomeService {
   //delete blog post
   deletePost(id: number): Observable<string> {
     return this.http.delete(`${this.url}/posts/${id}`, { responseType: 'text' })
+  }
+
+  //delete blog post only by admin
+  deletePostByAdmin(id: number): Observable<string> {
+    return this.http.delete(`${this.url}/posts/admin/${id}`, { responseType: 'text' })
   }
 
 

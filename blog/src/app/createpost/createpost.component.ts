@@ -55,10 +55,12 @@ export class CreatepostComponent {
         console.log(res)
 
         this.toastTriggerService.triggerToast('success', 'Success', 'Post created!!')
+        this.router.navigate([''])
       },
       error: (err) => {
         console.log("Error ->>>" + err)
           console.log("Inside Error");
+          this.toastTriggerService.triggerToast('error', 'Failure', err.message)
       }
     })
   }

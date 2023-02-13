@@ -12,7 +12,7 @@ import { ToastTrigerService } from '../services/toast-triger.service';
 })
 export class SignupComponent implements OnInit {
   errorMessage = ""
-
+  fileToUpload: File | null = null;
   constructor(private authService: AuthService, private router: Router , private  toastTriggerService: ToastTrigerService)
   {
 
@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = new FormGroup({
       'name': new FormControl(null , Validators.required),
       'username': new FormControl(null , Validators.required),
+      'image': new FormControl(null , Validators.required),
       'email': new FormControl(null , [Validators.required
         // , Validators.email
       ]),
@@ -52,7 +53,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     console.log(this.signupForm.value)
-    this.authService.signUp(this.signupForm.value).subscribe({
+    this.authService.signUpV2(this.signupForm.value , this.fileToUpload!!).subscribe({
       next: (res: any) => {
         console.log("type of ->>"+ typeof(res))
         console.log("type of ->>"+ res)
@@ -67,6 +68,7 @@ export class SignupComponent implements OnInit {
           console.log("Inside Error");
           console.log(err.error.message);
           this.errorMessage = err.error.message
+          this.toastTriggerService.triggerToast('error', 'Failure', err.message)
       }
     })
   }
@@ -77,4 +79,15 @@ export class SignupComponent implements OnInit {
 
     return password?.value === confirmPassword?.value ? null : { notmatched: true };
   };
+
+  onChangeFile(event: any) {
+
+    if (event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      this.fileToUpload = file;
+      }
+
+
+  }
+
 }

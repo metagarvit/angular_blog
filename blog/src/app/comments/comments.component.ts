@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../services/home.service';
 import { CreateComment } from '../interfaces/CreateComment';
 import { MessageService } from 'primeng-lts/api';
+import { ToastTrigerService } from '../services/toast-triger.service';
 // import {MessageService} from 'primeng-lts/api';
 
 @Component({
@@ -15,7 +16,7 @@ export class CommentsComponent  implements OnInit{
 
 
   constructor(private homeService: HomeService,public  route: ActivatedRoute
-    ,private messageService: MessageService
+    ,private messageService: MessageService,private toastTriggerService: ToastTrigerService
     ) { }
 
 
@@ -43,6 +44,7 @@ export class CommentsComponent  implements OnInit{
       next: (res: CreateComment) => {
         console.log(res)
         this.data.push(res)
+        this.commentForm.reset();
         this.messageService.add({severity:'success', summary:'Success', detail:'Comment send successfull'});
       },
       error: (err) => {
@@ -50,6 +52,7 @@ export class CommentsComponent  implements OnInit{
           console.log("Inside Error");
           console.log(err.error.message);
           // this.errorMessage = err.error.message
+          this.toastTriggerService.triggerToast('error', 'Failure', err.message)
       }
     })
 

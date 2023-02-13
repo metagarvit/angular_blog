@@ -5,7 +5,10 @@ export interface BlogDetails {
   title: string,
   description: string,
   lastModifiedDate: string,
-  categoryId: string
+  lastModifiedBy: string,
+  userProfile: string,
+  image: string,
+  categoryId: string,
   comments: [
     CreateComment
   ]

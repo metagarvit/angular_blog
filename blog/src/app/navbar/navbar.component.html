@@ -40,16 +40,14 @@
               style="position: absolute; transform: translateX(-3rem);">
               <li><a class="dropdown-item" routerLink="/userdetails" style="color: black!important;">Details</a></li>
               <li><a class="dropdown-item" routerLink="/bloglist" style="color: black!important;">My Blog</a></li>
-              <li>
+              <!-- <li>
                 <hr class="dropdown-divider"  *ngIf="authService.isAdmin()">
               </li>
               <li><a class="dropdown-item" routerLink="/admin/bloglist" style="color: black!important;"  *ngIf="authService.isAdmin()">All Blog</a>
-              </li>
+              </li> -->
 
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" routerLink="/login" style="color: black!important;">Logout</a></li>
+
+              <li><a class="dropdown-item" href="/login" style="color: black!important;">Logout</a></li>
             </ul>
           </li>
         </ul>
